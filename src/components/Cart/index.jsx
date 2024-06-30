@@ -273,7 +273,6 @@ const Cart = ({ userGuid }) => {
 
   const handleApplyDiscountCode = async () => {
     try {
-      console.log("Applying discount code with userGuid:", userGuid);
       await applyDiscountCode(discountCode, userGuid);
       setDiscountApplied(true);
       const totalPriceData = await getTotalPrice();

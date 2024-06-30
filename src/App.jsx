@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-
+import { fetchHeaderData, createAdmin } from "./utils/api";
 import Header from "./components/Header";
 import Cart from "./components/Cart";
 import Home from "./pages/Home";
@@ -13,29 +12,18 @@ function App() {
     UserName: "",
   });
 
-  const fetchHeaderData = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:8080/api/shoppingcart/header"
-      );
-      setHeaderData(response.data);
-      console.log("HeaderData", response.data);
-    } catch (error) {
-      console.error("Ошибка при получении данных заголовка:", error);
-    }
-  };
-
-  const createAdmin = async () => {
-    try {
-      await axios.post("http://localhost:8080/api/Admin/create?value=12");
-    } catch (error) {
-      console.error("Ошибка при создании администратора:", error);
-    }
-  };
-
   useEffect(() => {
-    createAdmin();
-    fetchHeaderData();
+    const fetchData = async () => {
+      try {
+        await createAdmin();
+        const data = await fetchHeaderData();
+        setHeaderData(data);
+      } catch (error) {
+        console.error("Ошибка при загрузке данных:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (

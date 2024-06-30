@@ -2,6 +2,24 @@ import axios from "axios";
 
 const API_BASE_URL = "http://localhost:8080/api/ShoppingCart";
 
+export const createAdmin = async () => {
+  try {
+    await axios.post("http://localhost:8080/api/Admin/create?value=12");
+  } catch (error) {
+    console.error("Ошибка при создании администратора:", error);
+    throw error;
+  }
+};
+export const fetchHeaderData = async () => {
+  try {
+    const responce = await axios.get(`${API_BASE_URL}/header`);
+    return responce.data;
+  } catch (error) {
+    console.error("Ошибка при получении данных заголовка:", error);
+    throw error;
+  }
+};
+
 export const fetchCartProducts = async () => {
   try {
     const response = await axios.get(`${API_BASE_URL}/products`);
