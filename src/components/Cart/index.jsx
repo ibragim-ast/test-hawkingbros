@@ -257,7 +257,6 @@ const Cart = ({ userGuid }) => {
         await changeProductQuantity(id, diff, "inc", userGuid);
       } else if (diff < 0) {
         if (currentQuantity + diff <= 0) {
-          // Если новое количество меньше или равно 0, вызываем функцию удаления продукта
           await handleDeleteProduct(id);
         } else {
           await changeProductQuantity(id, -diff, "dec", userGuid);
