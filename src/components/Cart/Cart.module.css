@@ -1,0 +1,50 @@
+.cart {
+  padding: 20px 30px;
+  background-color: #f4f4f4;
+}
+
+.quantityContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+}
+
+.quantityButton {
+  width: 20px;
+  height: 20px;
+}
+
+.price {
+  text-wrap: nowrap;
+}
+
+.totalPrice {
+  margin-top: 20px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  justify-content: center;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.viewedList {
+  margin: 20px 0;
+}
+
+.cartInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.discountSection {
+  margin-top: 20px;
+}
