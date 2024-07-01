@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import { Table, Button, InputNumber, Spin, Input, Image } from "antd";
+import { Table, Button, InputNumber, Spin, Input, Image, message } from "antd";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import EmptyCart from "../EmptyCart";
@@ -25,6 +25,7 @@ const Cart = ({ userGuid }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [discountCode, setDiscountCode] = useState("");
   const [discountApplied, setDiscountApplied] = useState(false);
+  const [error, setError] = useState(null);
 
   const columns = [
     {
@@ -231,6 +232,10 @@ const Cart = ({ userGuid }) => {
         setTotalPrice(totalPriceData);
       } catch (error) {
         console.error(error);
+        setError("Ошибка при загрузке данных. Пожалуйста, попробуйте позже.");
+        message.error(
+          "Ошибка при загрузке данных. Пожалуйста, попробуйте позже."
+        );
       } finally {
         setIsLoading(false);
       }
@@ -246,7 +251,7 @@ const Cart = ({ userGuid }) => {
     try {
       const product = cartProducts.find((p) => p.Id === id);
       if (!product) {
-        console.error(`Товар с идентификатором ${id} не найден.`);
+        message.error(`Товар с идентификатором ${id} не найден.`);
         return;
       }
 
@@ -272,6 +277,7 @@ const Cart = ({ userGuid }) => {
       setTotalPrice(totalPriceData);
     } catch (error) {
       console.error("Ошибка при изменении количества продуктов:", error);
+      message.error("Ошибка при изменении количества продуктов.");
     }
   };
 
@@ -283,8 +289,10 @@ const Cart = ({ userGuid }) => {
       setTotalPrice(totalPriceData);
       const cartProductsData = await fetchCartProducts();
       setCartProducts(cartProductsData);
+      message.success("Промокод успешно применен!");
     } catch (error) {
       console.error("Ошибка при применении промокода:", error);
+      message.error("Ошибка при применении промокода.");
     }
   };
 
@@ -297,8 +305,10 @@ const Cart = ({ userGuid }) => {
       setTotalPrice(totalPriceData);
       const cartProductsData = await fetchCartProducts();
       setCartProducts(cartProductsData);
+      message.success("Промокод успешно удален!");
     } catch (error) {
       console.error("Ошибка при удалении промокода:", error);
+      message.error("Ошибка при удалении промокода.");
     }
   };
 
@@ -310,8 +320,10 @@ const Cart = ({ userGuid }) => {
       );
       const totalPriceData = await getTotalPrice();
       setTotalPrice(totalPriceData);
+      message.success("Товар успешно удален!");
     } catch (error) {
       console.error("Ошибка при удалении продукта из корзины:", error);
+      message.error("Ошибка при удалении продукта из корзины.");
     }
   };
 
@@ -321,8 +333,10 @@ const Cart = ({ userGuid }) => {
       setCartProducts([]);
       const totalPriceData = await getTotalPrice();
       setTotalPrice(totalPriceData);
+      message.success("Корзина успешно очищена!");
     } catch (error) {
       console.error("Ошибка при очистке корзины:", error);
+      message.error("Ошибка при очистке корзины.");
     }
   };
 
