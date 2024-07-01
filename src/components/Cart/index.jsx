@@ -283,7 +283,11 @@ const Cart = ({ userGuid }) => {
 
   const handleApplyDiscountCode = async () => {
     try {
-      await applyDiscountCode(discountCode, userGuid);
+      const responce = await applyDiscountCode(discountCode, userGuid);
+      if (responce.Description === "Промокод введен не верно") {
+        message.error(responce.Description);
+        return;
+      }
       setDiscountApplied(true);
       const totalPriceData = await getTotalPrice();
       setTotalPrice(totalPriceData);

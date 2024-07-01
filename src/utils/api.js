@@ -80,12 +80,13 @@ export const applyDiscountCode = async (discountCode, userGuid) => {
       DiscountName: discountCode,
       UsedGuid: userGuid,
     };
-    console.log("Sending payload:", payload);
-    await axios.post(`${API_BASE_URL}/discount`, payload, {
+
+    const responce = await axios.post(`${API_BASE_URL}/discount`, payload, {
       headers: {
         "Content-Type": "application/json",
       },
     });
+    return responce.data;
   } catch (error) {
     console.error("Ошибка при применении промокода:", error);
     throw error;
