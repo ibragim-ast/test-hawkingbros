@@ -344,6 +344,8 @@ const Cart = ({ userGuid }) => {
     <div className={styles.cart}>
       {isLoading ? (
         <Spin size="large" fullscreen={true} />
+      ) : error ? (
+        <div className={styles.error}>{error}</div>
       ) : cartProducts.length > 0 ? (
         <>
           <Button onClick={toggleOpenViewedList}>

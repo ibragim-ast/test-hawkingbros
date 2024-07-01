@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { message } from "antd";
 import { fetchHeaderData, createAdmin } from "./utils/api";
 import Header from "./components/Header";
-import Cart from "./components/Cart";
 import Home from "./pages/Home";
+import Cart from "./components/Cart";
 
 function App() {
   const [headerData, setHeaderData] = useState({
@@ -20,6 +21,7 @@ function App() {
         setHeaderData(data);
       } catch (error) {
         console.error("Ошибка при загрузке данных:", error);
+        message.error();
       }
     };
 

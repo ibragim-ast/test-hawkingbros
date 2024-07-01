@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { Button, Menu } from "antd";
 import {
@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 import styles from "./Header.module.css";
 
 const Header = ({ logoImg, userName }) => {
-  const [current, setCurrent] = React.useState("main");
+  const [current, setCurrent] = useState("main");
 
   const navItems = [
     {
